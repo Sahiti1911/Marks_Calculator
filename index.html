@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+    <title>Student Information</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body ng-controller="StudentController as studentCtrl">
+    <h1>Student Information</h1>
+    
+    <form name="studentForm" novalidate>
+        <div>
+            <label for="name">Student Name:</label>
+            <input type="text" id="name" name="name" ng-model="studentCtrl.student.name" ng-maxlength="50" required>
+            <span class="error" ng-show="studentForm.name.$error.required">Required.</span>
+            <span class="error" ng-show="studentForm.name.$error.maxlength">Too Long.</span>
+        </div>
+        
+        <div>
+            <label for="rollNumber">Roll Number:</label>
+            <input type="text" id="rollNumber" name="rollNumber" ng-model="studentCtrl.student.rollNumber" ng-maxlength="11" required>
+            <span class="error" ng-show="studentForm.rollNumber.$error.required">Required.</span>
+            <span class="error" ng-show="studentForm.rollNumber.$error.maxlength">Too Long.</span>
+        </div>
+        
+        <div>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" ng-model="studentCtrl.student.year" required>
+            <span class="error" ng-show="studentForm.year.$error.required">Required</span>
+        </div>
+        
+        <div>
+            <label for="math">Math Marks:</label>
+            <input type="number" id="math" name="math" ng-model="studentCtrl.student.marks.math" required>
+            <span class="error" ng-show="studentForm.math.$error.required">Required</span>
+        </div>
+
+        <div>
+            <label for="science">Science Marks:</label>
+            <input type="number" id="science" name="science" ng-model="studentCtrl.student.marks.science" required>
+            <span class="error" ng-show="studentForm.science.$error.required">Required</span>
+        </div>
+
+        <div>
+            <label for="english">English Marks:</label>
+            <input type="number" id="english" name="english" ng-model="studentCtrl.student.marks.english" required>
+            <span class="error" ng-show="studentForm.english.$error.required">Required</span>
+        </div>
+
+        <div>
+            <label for="history">History Marks:</label>
+            <input type="number" id="history" name="history" ng-model="studentCtrl.student.marks.history" required>
+            <span class="error" ng-show="studentForm.history.$error.required">Required</span>
+        </div>
+
+        <div>
+            <label for="computer">Computer Marks:</label>
+            <input type="number" id="computer" name="computer" ng-model="studentCtrl.student.marks.computer" required>
+            <span class="error" ng-show="studentForm.computer.$error.required">Required</span>
+        </div>
+
+        <div>
+            <label for="social">Social Marks:</label>
+            <input type="number" id="social" name="social" ng-model="studentCtrl.student.marks.social" required>
+            <span class="error" ng-show="studentForm.social.$error.required">Required</span>
+        </div>
+
+        <div>
+            <button ng-click="studentCtrl.calculateAggregate()" ng-disabled="studentForm.$invalid">Calculate Aggregate</button>
+        </div>
+    </form>
+    
+    <div ng-show="studentCtrl.showResults">
+        <h2>Student Information</h2>
+        <p><strong>Name:</strong> {{ studentCtrl.student.name }}</p>
+        <p><strong>Roll Number:</strong> {{ studentCtrl.student.rollNumber }}</p>
+        <p><strong>Year:</strong> {{ studentCtrl.student.year }}</p>
+        <p><strong>Math Marks:</strong> {{ studentCtrl.student.marks.math }}%</p>
+        <p><strong>Science Marks:</strong> {{ studentCtrl.student.marks.science }}%</p>
+        <p><strong>English Marks:</strong> {{ studentCtrl.student.marks.engilsh }}%</p>
+        <p><strong>History Marks:</strong> {{ studentCtrl.student.marks.history }}%</p>
+        <p><strong>Computer Science Marks:</strong> {{ studentCtrl.student.marks.computer }}%</p>
+        <p><strong>Social Marks:</strong> {{ studentCtrl.student.marks.social }}%</p>
+        <p><strong>Aggregate Percentage:</strong> {{ studentCtrl.aggregatePercentage }}%</p>
+    </div>
+    
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

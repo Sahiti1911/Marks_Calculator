@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+    <title>Student Information</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body ng-controller="StudentController as studentCtrl">
+    <h1>Student Information</h1>
+
+    <div ng-repeat="student in studentCtrl.students">
+        <form name="studentForm" novalidate>
+            <div>
+                <label for="name">Student Name:</label>
+                <input type="text" id="name" name="name" ng-model="student.name" ng-maxlength="50" required>
+                <span class="error" ng-show="studentForm.name.$error.required">Name is required.</span>
+                <span class="error" ng-show="studentForm.name.$error.maxlength">Name is too long.</span>
+            </div>
+
+            <div>
+                <label for="rollNumber">Roll Number:</label>
+                <input type="text" id="rollNumber" name="rollNumber" ng-model="student.rollNumber" ng-maxlength="11" required>
+                <span class="error" ng-show="studentForm.rollNumber.$error.required">Roll Number is required.</span>
+                <span class="error" ng-show="studentForm.rollNumber.$error.maxlength">Roll Number is too long.</span>
+            </div>
+
+            <div>
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" ng-model="student.year" required>
+                <span class="error" ng-show="studentForm.year.$error.required">Year is required.</span>
+            </div>
+
+            <div ng-repeat="subject in student.marks">
+                <label for="{{ subject.name }}">{{ subject.name }} Marks:</label>
+                <input type="number" id="{{ subject.name }}" name="{{ subject.name }}" ng-model="subject.marks" ng-maxlength="3" required>
+                <span class="error" ng-show="studentForm[subject.name].$error.required">{{ subject.name }} Marks are required.</span>
+                <span class="error" ng-show="studentForm[subject.name].$error.maxlength">Invalid {{ subject.name }} Marks.</span>
+                <span class="error" ng-show="subject.marks > 100">Marks should not be greater than 100.</span>
+            </div>
+
+            <p><strong>Aggregate Percentage:</strong> {{ student.aggregatePercentage }}%</p>
+        </form>
+    </div>
+
+    <button ng-click="studentCtrl.addStudent()">Add Student</button>
+
+    <button ng-click="studentCtrl.calculateAggregate()" ng-disabled="studentForm.$invalid">Calculate Aggregate</button>
+
+    <div ng-show="studentCtrl.showResults">
+        <h2>Student Information</h2>
+        <div ng-repeat="student in studentCtrl.students">
+            <p><strong>Name:</strong> {{ student.name }}</p>
+            <p><strong>Roll Number:</strong> {{ student.rollNumber }}</p>
+            <p><strong>Year:</strong> {{ student.year }}</p>
+            <p ng-repeat="subject in student.marks"><strong>{{ subject.name }} Marks:</strong> {{ subject.marks }}</p>
+            <p><strong>Aggregate Percentage:</strong> {{ student.aggregatePercentage }}%</p>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app1.js"></script>
+</body>
+</html>
